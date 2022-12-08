@@ -1,3 +1,9 @@
 DMLDemo.dmlInsertDemo_stndObj();
 DMLDemo.dmlInsertDemo_cstmObj();
 DMLDemo.dmlUpdateDemo_1();
+DMLDemo.dmlUpdateDemo_3();
+DMLDemo.dmlInsertDemo_4();
+DMLDemo.dmlInsertDemo_2_CO();
+DMLDemo.dmlInsertMultiple_right();
+DMLDemo.dmlInsertMultiple_right_2();
+DmlDemo.dmlUpdateMultiple_right1();
