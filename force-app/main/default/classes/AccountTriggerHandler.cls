@@ -32,12 +32,10 @@ public class AccountTriggerHandler {
                 accountIds.add(eachAcc.Id);
              }
         } //we have all acc ids where is vip is changed
-           
         //get contacts of all the accounts where vip is changed. 
         list<contact> allContacts = [select id, vip__c, accountId from contact where accountId in :accountIds];
        
         if (!allContacts.isEmpty()) {
-            
             //for loop of contact
             for (contact eachContact : allContacts) {
                 //set vip field same as account's vip field
@@ -45,12 +43,9 @@ public class AccountTriggerHandler {
                 account newAcc = accTriggerNewMap.get(eachContact.AccountId);
                 boolean accVIP = newAcc.vip__c;
 
-                eachContact.vip__c = accVIP;
+                eachContact.vip__c = accTriggerNewMap.get(eachContact.AccountId).vip__c;
             }
             update allContacts;
         }
-            
-        
-        //update contacts
     }
 }
