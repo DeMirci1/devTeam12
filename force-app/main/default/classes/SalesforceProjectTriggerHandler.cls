@@ -1,15 +1,28 @@
 public class SalesforceProjectTriggerHandler {
     public static void createDefaultTicket(List<salesforce_project__c> spTriggerNew) {
-         List<Salesforce_Ticket__c> stList = new list<Salesforce_Ticket__c>();
-         for (salesforce_project__c eachSP : spTriggerNew) {
-             Salesforce_Ticket__c st  = new Salesforce_Ticket__c();
-             st.Subject__c = 'Default st';
-             st.Salesforce_Project__c = eachSP.id;
-             stList.add(st);
+         try{
+             List<Salesforce_Ticket__c> stList = new list<Salesforce_Ticket__c>();
+             DefaultTicketInfo__c defaultValues = DefaultTicketInfo__c.getOrgDefaults();
+             for (salesforce_project__c eachSP : spTriggerNew) {
+                 Salesforce_Ticket__c st  = new Salesforce_Ticket__c();
+                 //set subject as custom setting's subject value
+                 st.Subject__c = defaultValues.Subject__c; //do not hard code this. make it a little dynamic.
+                 st.Salesforce_Project__c = eachSP.id;
+                 st.Priority__c = 'Medium';
+                 //set Description__c as custom setting's Description__c value
+                 st.Description__c = defaultValues.description__c;
+                 stList.add(st);
+             }
+             if (!stList.isEmpty()) {
+                 insert stList;
+             }
+         } catch(exception ex){
+             system.debug('exception msg: ' + ex.getMessage());
+             for (salesforce_project__c eachSP : spTriggerNew) {
+                 eachSP.addError('Error in creating Ticket. Please contact your administrator.');
+             }
          }
-         if (!stList.isEmpty()) {
-             insert stList;
-         }
+         
     }
  
     public static void validateSPComplete(List<salesforce_project__c> spTriggerNew, List<salesforce_project__c> spTriggerOld,
@@ -55,8 +68,6 @@ public class SalesforceProjectTriggerHandler {
                  spIds.add(eachSP.Id);
              }
          }
- 
- 
          //call future method to update all its tickets
          //call b)
          if (!spIds.isEmpty()) {
