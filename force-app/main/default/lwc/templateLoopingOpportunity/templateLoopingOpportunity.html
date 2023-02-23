@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Template Looping: Opportunity">
+        <div class="slds-var-m-around_medium">
+            <template for:each={opportunities} for:item="opp">
+                <div key={opp.Name} class="slds-var-p-top_small"> 
+                    <strong>{opp.Name}</strong><br/>
+                    {opp.Amount}, {opp.Stage}, {opp.Type}
+                </div>
+            </template>
+        </div>
+    </lightning-card>        
+</template>
