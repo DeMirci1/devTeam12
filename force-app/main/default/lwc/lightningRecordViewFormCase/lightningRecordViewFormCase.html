@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Lightning Record View Form: CASE" icon-name="standard:case">
+        <div class="slds-var-m-around_medium">
+            <lightning-record-view-form 
+                object-api-name={objectName}
+                fields ={fields} 
+                record-id={recordId}
+                onsuccess={successHandler}>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-output-field field-name={fields.accountId}></lightning-output-field>
+                        <lightning-output-field field-name={fields.contactId}></lightning-output-field>
+                        <lightning-output-field field-name={fields.subject}></lightning-output-field>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-output-field field-name={fields.description}></lightning-output-field>
+                        <lightning-output-field field-name={fields.priority}></lightning-output-field>
+                        <lightning-output-field field-name={fields.origin}></lightning-output-field>
+                    </div>
+                </div>
+            </lightning-record-view-form>
+        </div>
+    </lightning-card>
+</template>
+
+
+
+
+
+
+
+
+
