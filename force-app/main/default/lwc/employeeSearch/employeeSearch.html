@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Search Employees" icon-name="standard:record_lookup">
+        <div class="slds-var-m-around_medium">
+            <lightning-input
+                name="enter-search"
+                label="Enter a key word in order to fetch matching employee recordy"
+                type="search"
+                onkeyup={searchHandler}>
+        </lightning-input>
+        <div class="slds-var-m-top_small">
+            <template if:true={employees}>
+                <strong>Search Result:</strong> <br/>
+                <template for:each={employees} for:item="emp">
+                    <div key={emp.Id} class="slds-var-m-bottom_small">
+                        <strong>{emp.employee_name__c}</strong> <br/>
+                        {emp.designation__c}<br/>
+                        {emp.email__c}
+                    </div>
+                </template>
+            </template>
+            <template if:true={error}>
+                <strong>Search Error:</strong> <br/>
+                {error}
+            </template>
+        </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Update Record: Employee" icon-name="standard:contact">
+        <div class="slds-var-m-around_medium">
+            <template if:true={employee.data}>
+                <form class="empform">
+                    <lightning-input 
+                        label="Employee Name"
+                        type="text"
+                        name="employee_name__c"
+                        value={employee.data.fields.employee_name__c.value}
+                        onchange={changeHandler}>
+                    </lightning-input>
+                    <lightning-input 
+                        label="Email"
+                        type="email"
+                        name="email__c"
+                        value={employee.data.fields.email__c.value}
+                        onchange={changeHandler}>
+                    </lightning-input>
+                    <lightning-input 
+                        label="Designation"
+                        type="text"
+                        name="designation__c"
+                        value={employee.data.fields.designation__c.value}
+                        onchange={changeHandler}>
+                    </lightning-input>
+                    <br>
+                    <div class="slds-align_absolute-center">
+                        <lightning-button 
+                            label="Update"
+                            variant="brand"
+                            onclick={updateEmployee}>
+                        </lightning-button>                
+                    </div>
+                </form>
+            </template>
+        </div>
+    </lightning-card>
+</template>
